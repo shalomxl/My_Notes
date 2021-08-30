@@ -79,6 +79,7 @@
   - Uniswap
   - [RAI](https://docs.reflexer.finance/ungovernance/governance-minimization-guide) 随着时间推移，治理对功能的控制会越来越少。
 - 增加时间延迟：一个在时间 T 做出的治理决策只能在例如 T+90 天后生效。这允许认为这个决策不可接受的用户和应用搬到另一个应用 (或者进行分叉)。
+  - [compound治理案例](https://compound.finance/docs/governance)
 - 变得分叉友好：让用户更容易快速协调和实现分叉。
 
 ### 解决方案 2: 非代币驱动的治理
@@ -89,7 +90,12 @@
 - 参与证明 (Proof of participation)
   - 证明某个账户对应一个参与过某活动、通过了某教育培训、或在生态里做了有意义工作的系统。[POAP](https://poap.xyz/)  
 - 两者混合
-  - [二次方投票](https://vitalik.ca/general/2019/12/07/quadratic.html)：[Gitcoin案例)[https://gitcoin.co/issue/DemocracyEarth/DemocracyDAO/1]
+  - [二次方投票](https://vitalik.ca/general/2019/12/07/quadratic.html)：[Gitcoin案例](https://gitcoin.co/issue/DemocracyEarth/DemocracyDAO/1)
+
+人格证明和参与证明都需要某种形式的抗合谋:
+
+- [On Collusion](https://vitalik.ca/general/2019/04/03/collusion.html)
+- [MACI](https://github.com/appliedZKP/maci)
 
 ### 解决方案 3:  风险共担
 
