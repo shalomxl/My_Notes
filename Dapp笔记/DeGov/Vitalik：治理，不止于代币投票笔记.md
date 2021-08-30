@@ -87,7 +87,7 @@ V神主张尽量减少所有非自动化的参数调整，并且他是 RAI协议
 ### 解决方案1: 有限治理
 
 - 对固定的参数选项采用有限治理
-  - Uniswap
+  - Uniswap 仅允许影响 (i) 代币分发和 (ii) Uniswap 交易所的 0.05% 费率。
   - [RAI](https://docs.reflexer.finance/ungovernance/governance-minimization-guide) 随着时间推移，治理对功能的控制会越来越少。
 - 增加时间延迟：一个在时间 T 做出的治理决策只能在例如 T+90 天后生效。这允许认为这个决策不可接受的用户和应用搬到另一个应用 (或者进行分叉)。
   - [compound治理案例](https://compound.finance/docs/governance)
@@ -108,7 +108,7 @@ V神主张尽量减少所有非自动化的参数调整，并且他是 RAI协议
 - [On Collusion](https://vitalik.ca/general/2019/04/03/collusion.html)
 - [MACI](https://github.com/appliedZKP/maci)
 
-### 解决方案 3:  风险共担
+### 解决方案 3:  风险绑定
 
 风险和自己的选择捆绑在一起。
 
