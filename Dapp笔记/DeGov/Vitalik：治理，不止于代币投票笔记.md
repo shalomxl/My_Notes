@@ -71,27 +71,25 @@
 
 可以通过compound抵押ETH来借出治理代币，进行投票过后，再次将治理代币归还以赎回ETH。治理权是放贷者拥有的，但是投票带来的收益确是贷款者获得。
 
-![image](https://mmbiz.qpic.cn/mmbiz_png/4EL2Q3tnbK8fEH1Xm9uF5KBUdsg25w8jsXuXytdrBvFSInFTFyrXjBaiaxibKFgRcFfSUvd2SsPgNvq9XQurxT1w/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
-
-
+![image](./assets/3071630309059_.pic_hd.jpg)
 
 ### 解决方案1: 有限治理
 
 - 对固定的参数选项采用有限治理
   - Uniswap
-  - RAI 随着时间推移，治理对功能的控制会越来越少。
+  - [RAI](https://docs.reflexer.finance/ungovernance/governance-minimization-guide) 随着时间推移，治理对功能的控制会越来越少。
 - 增加时间延迟：一个在时间 T 做出的治理决策只能在例如 T+90 天后生效。这允许认为这个决策不可接受的用户和应用搬到另一个应用 (或者进行分叉)。
-- 变得更分叉友好：让用户更容易快速协调和实现分叉。
+- 变得分叉友好：让用户更容易快速协调和实现分叉。
 
 ### 解决方案 2: 非代币驱动的治理
 
 - 人格证明系统 (Proof of personhood systems)
-  - ProofOfHumanity  
-  - BrightID
+  - [ProofOfHumanity](https://app.proofofhumanity.id/)  
+  - [BrightID](https://www.brightid.org/)
 - 参与证明 (Proof of participation)
-  - 证明某个账户对应一个参与过某活动、通过了某教育培训、或在生态里做了有意义工作的系统。POAP  
+  - 证明某个账户对应一个参与过某活动、通过了某教育培训、或在生态里做了有意义工作的系统。[POAP](https://poap.xyz/)  
 - 两者混合
-  - 二次方投票：Gitcoin
+  - [二次方投票](https://vitalik.ca/general/2019/12/07/quadratic.html)：[Gitcoin案例)[https://gitcoin.co/issue/DemocracyEarth/DemocracyDAO/1]
 
 ### 解决方案 3:  风险共担
 
