@@ -1,8 +1,8 @@
-# 看项目步骤
+# showme项目分析
 
-## 如何找消息
+## 找消息
 
-## 如何筛选项目
+## 筛选项目
 
 ### 工具筛选
 
@@ -10,7 +10,11 @@
 
 #### [dappradar](https://dappradar.com/)
 
+无
+
 #### [dapp.com](https://www.dapp.com/)
+
+无
 
 #### [defillama](https://defillama.com/)
 
@@ -97,12 +101,3 @@ tips：
 nansen、theblock、debank等工具
 链闻、深潮、Messari等平台的价值信息。
 Coindesk、Decrypt等资讯平台
-
-
-
-## 工具
-
-### 空投
-
-<https://dappradar.com/hub/airdrops> dappradar的空投信息发布
-
