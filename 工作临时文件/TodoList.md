@@ -1,5 +1,4 @@
 # TODO_List
 
-1. 做opensea的项目收集过滤
-2. discord 机器人
-3. 大量Twitter账号
+gorm自动生成数据模型工具： <https://gitee.com/anggege888/gormt>
+
