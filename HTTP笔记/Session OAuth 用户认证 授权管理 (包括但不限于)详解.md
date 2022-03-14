@@ -275,3 +275,4 @@ func (g *GoogleAuth) oneTimePassword(key []byte, data []byte) uint32 {
 
 ## 维持上下文状态
 
+未完待续……
