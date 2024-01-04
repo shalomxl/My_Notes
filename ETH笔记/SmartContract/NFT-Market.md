@@ -323,3 +323,210 @@ func main() {
 
 这段代码提供了一个框架，用于解析 OpenSea 的 `OrderFulfilled` 事件日志数据。根据您合约的具体实现，可能需要做进一步的调整。
 
+
+# LooksRare
+
+## TakerBid
+
+```
+event TakerBid(
+    NonceInvalidationParameters nonceInvalidationParameters,
+    address bidUser, // taker (initiates the transaction)
+    address bidRecipient, // taker (receives the NFT)
+    uint256 strategyId,
+    address currency,
+    address collection,
+    uint256[] itemIds,
+    uint256[] amounts,
+    address[2] feeRecipients,
+    uint256[3] feeAmounts
+);
+
+struct NonceInvalidationParameters {
+    bytes32 orderHash;
+    uint256 orderNonce;
+    bool isNonceInvalidated;
+}
+```
+
+### 案例交易
+
+https://etherscan.io/tx/0x9a09678e0b81dc128db8b2075781e2207b644c29fc0adcd661fa552b9b418de8#eventlog
+
+### 如何解析Event
+
+要解析 LooksRare 的 `TakerBid` 事件日志数据，我们首先需要定义与 Solidity 结构体相对应的 Go 结构体，并使用 `go-ethereum` 库来解析日志数据。以下是一个 Go 语言示例，展示了如何实现这一解析过程：
+
+#### 定义 Go 结构体
+
+```go
+package main
+
+import (
+	"fmt"
+	"math/big"
+	"strings"
+
+	"github.com/ethereum/go-ethereum/accounts/abi"
+	"github.com/ethereum/go-ethereum/common"
+)
+
+// NonceInvalidationParameters 结构体
+type NonceInvalidationParameters struct {
+	OrderHash          [32]byte
+	OrderNonce         *big.Int
+	IsNonceInvalidated bool
+}
+
+// TakerBidEvent 结构体
+type TakerBidEvent struct {
+	NonceInvalidationParameters NonceInvalidationParameters
+	BidUser                     common.Address
+	BidRecipient                common.Address
+	StrategyId                  *big.Int
+	Currency                    common.Address
+	Collection                  common.Address
+	ItemIds                     []*big.Int
+	Amounts                     []*big.Int
+	FeeRecipients               [2]common.Address
+	FeeAmounts                  [3]*big.Int
+}
+
+func main() {
+	// ABI 字符串
+	abiData := "" // ABI 字符串，您需要从合约的 ABI 中获取
+	parsedAbi, err := abi.JSON(strings.NewReader(abiData))
+	if err != nil {
+		panic(err)
+	}
+
+	// 日志数据，假设您已经有了
+	var logData []byte
+
+	// 解析日志
+	event := new(TakerBidEvent)
+	err = parsedAbi.UnpackIntoInterface(event, "TakerBid", logData)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("TakerBid Event: %+v\n", event)
+}
+
+// 注意：
+// - ABI 字符串和日志数据需要您从合约的 ABI 和具体的事件日志中获取。
+// - 确保已安装 go-ethereum 库。
+```
+
+#### 注意事项
+
+- **ABI 字符串**：您需要从 LooksRare 合约的 ABI 中提取相关的 ABI 字符串。
+- **日志数据**：您需要从以太坊区块链上获取 `TakerBid` 事件的实际日志数据。
+- **数组和固定大小数组**：`itemIds` 和 `amounts` 是动态大小的数组，而 `feeRecipients` 和 `feeAmounts` 是固定大小的数组。这在 Go 结构体中分别对应于切片 (`[]*big.Int`) 和固定大小的数组 (`[2]common.Address` 和 `[3]*big.Int`)。
+- **安装 `go-ethereum` 库**：此代码依赖于 `go-ethereum` 库，您需要确保已经正确安装了这个库。
+
+通过上述步骤和代码，您可以解析 LooksRare 的 `TakerBid` 事件日志数据，以便进一步处理和分析。
+
+## TakerAsk
+
+```
+event TakerAsk(
+    NonceInvalidationParameters nonceInvalidationParameters,
+    address askUser, // taker (initiates the transaction)
+    address bidUser, // maker (receives the NFT)
+    uint256 strategyId,
+    address currency,
+    address collection,
+    uint256[] itemIds,
+    uint256[] amounts,
+    address[2] feeRecipients,
+    uint256[3] feeAmounts
+);
+
+struct NonceInvalidationParameters {
+    bytes32 orderHash;
+    uint256 orderNonce;
+    bool isNonceInvalidated;
+}
+```
+
+### 案例交易
+
+暂未找到
+
+### 解析Event
+
+要解析 LooksRare 的 `TakerAsk` 事件日志数据，我们将遵循与解析 `TakerBid` 事件类似的步骤。首先，定义与 Solidity 结构体相对应的 Go 结构体，然后使用 `go-ethereum` 库来解析日志数据。以下是解析 `TakerAsk` 事件的 Go 代码示例：
+
+#### 定义 Go 结构体
+
+```go
+package main
+
+import (
+	"fmt"
+	"math/big"
+	"strings"
+
+	"github.com/ethereum/go-ethereum/accounts/abi"
+	"github.com/ethereum/go-ethereum/common"
+)
+
+// NonceInvalidationParameters 结构体
+type NonceInvalidationParameters struct {
+	OrderHash          [32]byte
+	OrderNonce         *big.Int
+	IsNonceInvalidated bool
+}
+
+// TakerAskEvent 结构体
+type TakerAskEvent struct {
+	NonceInvalidationParameters NonceInvalidationParameters
+	AskUser                     common.Address
+	BidUser                     common.Address
+	StrategyId                  *big.Int
+	Currency                    common.Address
+	Collection                  common.Address
+	ItemIds                     []*big.Int
+	Amounts                     []*big.Int
+	FeeRecipients               [2]common.Address
+	FeeAmounts                  [3]*big.Int
+}
+
+func main() {
+	// ABI 字符串
+	abiData := "" // ABI 字符串，您需要从合约的 ABI 中获取
+	parsedAbi, err := abi.JSON(strings.NewReader(abiData))
+	if err != nil {
+		panic(err)
+	}
+
+	// 日志数据，假设您已经有了
+	var logData []byte
+
+	// 解析日志
+	event := new(TakerAskEvent)
+	err = parsedAbi.UnpackIntoInterface(event, "TakerAsk", logData)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("TakerAsk Event: %+v\n", event)
+}
+
+// 注意：
+// - ABI 字符串和日志数据需要您从合约的 ABI 和具体的事件日志中获取。
+// - 确保已安装 go-ethereum 库。
+```
+
+#### 注意事项
+
+- **ABI 字符串**：您需要从 LooksRare 合约的 ABI 中提取相关的 ABI 字符串。
+- **日志数据**：您需要从以太坊区块链上获取 `TakerAsk` 事件的实际日志数据。
+- **数组和固定大小数组**：`itemIds` 和 `amounts` 是动态大小的数组，而 `feeRecipients` 和 `feeAmounts` 是固定大小的数组。这在 Go 结构体中分别对应于切片 (`[]*big.Int`) 和固定大小的数组 (`[2]common.Address` 和 `[3]*big.Int`)。
+- **安装 `go-ethereum` 库**：此代码依赖于 `go-ethereum` 库，您需要确保已经正确安装了这个库。
+
+通过上述步骤和代码，您可以解析 LooksRare 的 `TakerAsk` 事件日志数据，以便进行进一步的处理和分析。
+
+
+# Element
