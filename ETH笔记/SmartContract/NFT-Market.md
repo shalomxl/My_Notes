@@ -530,3 +530,167 @@ func main() {
 
 
 # Element
+
+## ERC721SellOrderFilled
+
+```
+ERC721SellOrderFilled (bytes32 orderHash, address maker, address taker, uint256 nonce, address erc20Token, uint256 erc20TokenAmount, tuple[] fees, address erc721Token, uint256 erc721TokenId)
+
+struct FeeItem {
+    address recipient; // 接收者地址
+    uint256 amount;    // 接收的费用金额
+}
+```
+
+### 解析 Event data
+
+为了解析 Element 的 `ERC721SellOrderFilled` 事件日志数据，我们将遵循前面讨论的步骤。首先，我们定义与 Solidity 结构体相对应的 Go 结构体，然后使用 `go-ethereum` 库来解析日志数据。以下是更新后的 Go 代码示例：
+
+#### 定义 Go 结构体
+
+```go
+package main
+
+import (
+	"fmt"
+	"math/big"
+	"strings"
+
+	"github.com/ethereum/go-ethereum/accounts/abi"
+	"github.com/ethereum/go-ethereum/common"
+)
+
+// FeeItem 结构体
+type FeeItem struct {
+	Recipient common.Address
+	Amount    *big.Int
+}
+
+// ERC721SellOrderFilledEvent 结构体
+type ERC721SellOrderFilledEvent struct {
+	OrderHash       [32]byte
+	Maker           common.Address
+	Taker           common.Address
+	Nonce           *big.Int
+	Erc20Token      common.Address
+	Erc20TokenAmount *big.Int
+	Fees            []FeeItem
+	Erc721Token     common.Address
+	Erc721TokenId   *big.Int
+}
+
+func main() {
+	// ABI 字符串
+	abiData := "" // ABI 字符串，您需要从合约的 ABI 中获取
+	parsedAbi, err := abi.JSON(strings.NewReader(abiData))
+	if err != nil {
+		panic(err)
+	}
+
+	// 日志数据，假设您已经有了
+	var logData []byte
+
+	// 解析日志
+	event := new(ERC721SellOrderFilledEvent)
+	err = parsedAbi.UnpackIntoInterface(event, "ERC721SellOrderFilled", logData)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("ERC721SellOrderFilled Event: %+v\n", event)
+}
+
+// 注意：
+// - ABI 字符串和日志数据需要您从合约的 ABI 和具体的事件日志中获取。
+// - 确保已安装 go-ethereum 库。
+```
+
+#### 注意事项
+
+- **ABI 字符串**：您需要从 Element 合约的 ABI 中提取相关的 ABI 字符串。
+- **日志数据**：您需要从以太坊区块链上获取 `ERC721SellOrderFilled` 事件的实际日志数据。
+- **安装 `go-ethereum` 库**：此代码依赖于 `go-ethereum` 库，您需要确保已经正确安装了这个库。
+
+这段代码提供了一个框架，用于解析 Element 的 `ERC721SellOrderFilled` 事件日志数据。根据您合约的具体实现，可能需要做进一步的调整。
+
+## ERC721BuyOrderFilled
+
+```
+ERC721BuyOrderFilled (bytes32 orderHash, address maker, address taker, uint256 nonce, address erc20Token, uint256 erc20TokenAmount, tuple[] fees, address erc721Token, uint256 erc721TokenId)
+
+struct FeeItem {
+    address recipient; // 接收者地址
+    uint256 amount;    // 接收的费用金额
+}
+```
+
+### 解析 Event data
+
+要解析 Element 的 `ERC721BuyOrderFilled` 事件日志数据，我们将采用与之前相同的方法。首先定义与 Solidity 结构体相对应的 Go 结构体，然后使用 `go-ethereum` 库来解析日志数据。假设 `fees` 数组的结构与之前相同（包含接收者地址和金额），我们可以使用相同的 `FeeItem` 结构体定义。以下是解析 `ERC721BuyOrderFilled` 事件的 Go 代码示例：
+
+#### 定义 Go 结构体
+
+```go
+package main
+
+import (
+	"fmt"
+	"math/big"
+	"strings"
+
+	"github.com/ethereum/go-ethereum/accounts/abi"
+	"github.com/ethereum/go-ethereum/common"
+)
+
+// FeeItem 结构体
+type FeeItem struct {
+	Recipient common.Address
+	Amount    *big.Int
+}
+
+// ERC721BuyOrderFilledEvent 结构体
+type ERC721BuyOrderFilledEvent struct {
+	OrderHash       [32]byte
+	Maker           common.Address
+	Taker           common.Address
+	Nonce           *big.Int
+	Erc20Token      common.Address
+	Erc20TokenAmount *big.Int
+	Fees            []FeeItem
+	Erc721Token     common.Address
+	Erc721TokenId   *big.Int
+}
+
+func main() {
+	// ABI 字符串
+	abiData := "" // ABI 字符串，您需要从合约的 ABI 中获取
+	parsedAbi, err := abi.JSON(strings.NewReader(abiData))
+	if err != nil {
+		panic(err)
+	}
+
+	// 日志数据，假设您已经有了
+	var logData []byte
+
+	// 解析日志
+	event := new(ERC721BuyOrderFilledEvent)
+	err = parsedAbi.UnpackIntoInterface(event, "ERC721BuyOrderFilled", logData)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("ERC721BuyOrderFilled Event: %+v\n", event)
+}
+
+// 注意：
+// - ABI 字符串和日志数据需要您从合约的 ABI 和具体的事件日志中获取。
+// - 确保已安装 go-ethereum 库。
+```
+
+#### 注意事项
+
+- **ABI 字符串**：您需要从 Element 合约的 ABI 中提取相关的 ABI 字符串。
+- **日志数据**：您需要从以太坊区块链上获取 `ERC721BuyOrderFilled` 事件的实际日志数据。
+- **安装 `go-ethereum` 库**：此代码依赖于 `go-ethereum` 库，您需要确保已经正确安装了这个库。
+
+这段代码提供了一个框架，用于解析 Element 的 `ERC721BuyOrderFilled` 事件日志数据。根据您合约的具体实现，可能需要做进一步的调整。
